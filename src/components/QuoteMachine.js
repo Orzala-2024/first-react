@@ -6,7 +6,6 @@ import './QuoteMachine.css';
 function QuoteMachine() {
   const [quote, setQuote] = useState('');
   const [author, setAuthor] = useState('');
-  const [bgImage, setBgImage] = useState('');
   const [copied, setCopied] = useState(false);
 
   const fetchQuote = async () => {
@@ -23,22 +22,8 @@ function QuoteMachine() {
     }
   };
 
-  const images = ['bg1.jpg', 'bg2.jpg', 'bg3.jpg', 'bg4.jpg', 'bg5.jpeg', 'bg6.jpg', 'bg7.png'];
-
-  const setRandomBackgroundImage = () => {
-    const randomImage = images[Math.floor(Math.random() * images.length)];
-    setBgImage(`/images/${randomImage}`);
-  };
-
   useEffect(() => {
     fetchQuote();
-    setRandomBackgroundImage();
-
-    const intervalId = setInterval(() => {
-      setRandomBackgroundImage();
-    }, 5000);
-
-    return () => clearInterval(intervalId);
   }, []);
 
   const copyQuoteToClipboard = () => {
@@ -55,10 +40,7 @@ function QuoteMachine() {
   };
 
   return (
-    <div
-      className="quote-machine"
-      style={{ backgroundImage: `url(${bgImage})` }}
-    >
+    <div className="quote-machine">
       <h1>Quote Machine</h1>
       <div className="quote-box" id="quote-box">
         <div className="quote-text">
